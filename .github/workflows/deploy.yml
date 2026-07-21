@@ -1,0 +1,65 @@
+name: Deploy static site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Allow the workflow to deploy to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one concurrent deployment; don't cancel an in-progress run
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  # Custom domain the site is served from (root). Used for the sitemap and the CNAME.
+  SITE_HOST: martinnewham.art
+  APP_ENV: prod
+  APP_DEBUG: 0
+
+jobs:
+  build:
+    name: Build (Stenope)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, intl, ctype, iconv, dom
+          coverage: none
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer install --no-dev --prefer-dist --no-progress --optimize-autoloader
+
+      - name: Build static site
+        run: php bin/console stenope:build --host="$SITE_HOST" --scheme=https --no-interaction
+
+      - name: Add CNAME for custom domain
+        run: echo "$SITE_HOST" > build/CNAME
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
