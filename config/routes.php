@@ -9,9 +9,4 @@ return static function (RoutingConfigurator $routingConfigurator): void {
         'path' => '../src/Controller/Controller',
         'namespace' => 'App\Controller\Controller',
     ], 'attribute');
-
-    $routingConfigurator->import([
-        'path' => __DIR__ . '/../src/Controller/Admin',
-        'namespace' => 'App\Controller\Admin',
-    ], 'attribute');
 };

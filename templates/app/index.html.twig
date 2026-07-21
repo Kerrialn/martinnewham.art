@@ -4,7 +4,6 @@
     <div class="container" id="content">
         <div class="row justify-content-center g-3">
 
-
             <div class="col-12 col-md-10">
 
                 <div class="vstack gap-5">
@@ -38,13 +37,10 @@
 
                     {% for artwork in artworks %}
                         <div class="artwork">
-                            <img src="{{ asset('uploads/artwork/' ~ artwork.artworkImageName) }}"
-                                    class="img-fluid" alt="..." />
+                            <img src="{{ asset('images/' ~ artwork.image) }}"
+                                    class="img-fluid" alt="{{ artwork.title }}" />
                             <div class="plaque">
                                 <div class="title">{{ artwork.title|title }}</div>
-                                <div class="sub-title">
-                                    {{ artwork.description }}
-                                </div>
                                 <div class="price">
                                     <a class="link-dark" href="{{ path('purchase') }}">Purchase this work</a>
                                 </div>

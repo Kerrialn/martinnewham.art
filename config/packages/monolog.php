@@ -26,7 +26,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                     'process_psr_3_messages' => false,
                     'channels' => [
                         '!event',
-                        '!doctrine',
                         '!console',
                     ],
                 ],
@@ -80,7 +79,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                     'process_psr_3_messages' => false,
                     'channels' => [
                         '!event',
-                        '!doctrine',
                     ],
                 ],
                 'deprecation' => [

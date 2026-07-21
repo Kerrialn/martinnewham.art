@@ -1,0 +1,105 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+.nunito-normal {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.nunito-light {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200 !important;
+    font-style: normal;
+}
+
+* {
+    color: #000;
+    font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+#content {
+    min-height: 100vh;
+}
+
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.artwork {
+    margin: 20px auto;
+    position: relative;
+}
+
+.artwork img {
+}
+
+.artwork img:hover {
+    pointer-events: none;
+    transition: all 0.85s ease-in-out;
+}
+
+.artwork .title {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.artwork .sub-title {
+    font-size: 12px;
+}
+
+.carousel-img {
+    width: 100%;
+    height: 450px;
+    background-size: cover;
+    object-fit: cover;
+    background-position: center center;
+}
+
+@media (max-width: 0px) {
+    .logo-img {
+        width: 100%
+    }
+
+}
+
+.logo-img {
+    width: 100%;
+}
+
+
+@media (min-width: 700px) {
+
+
+    .logo-img {
+        width: 300px;
+    }
+
+    .artwork .plaque {
+        position: absolute;
+        top: 75%;
+        transform: translateY(-75%);
+        left: 5%;
+        width: 30%;
+    }
+}
+
+
+.price {
+    font-size: 12px;
+}
+
+

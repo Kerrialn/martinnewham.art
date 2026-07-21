@@ -10,9 +10,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'globals' => [
             'app_name' => 'artstudioprague',
         ],
-        'form_themes' => [
-            'bootstrap_5_layout.html.twig',
-        ],
     ]);
     if ($containerConfigurator->env() === 'test') {
         $containerConfigurator->extension('twig', [
