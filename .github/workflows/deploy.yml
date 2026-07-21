@@ -18,12 +18,12 @@ concurrency:
 
 env:
   # --- Where the site is served ---
-  # Project page (default): served under a subpath named after the repo.
-  #   BASE_PATH: /martinnewham.art   SITE_HOST: kerrialn.github.io
-  # Custom domain at root: leave BASE_PATH empty and set SITE_HOST to the domain,
-  #   then re-enable the "Add CNAME" step below and configure DNS + Settings > Pages.
-  BASE_PATH: /martinnewham.art
-  SITE_HOST: kerrialn.github.io
+  # Custom domain at root (current setup): SITE_HOST is the domain, no base path.
+  #   The "Add CNAME" step binds the domain to the deployment.
+  # To serve from the github.io project subpath instead, set:
+  #   SITE_HOST: kerrialn.github.io  and add --base-url="/<repo-name>" to the build,
+  #   and remove the "Add CNAME" step.
+  SITE_HOST: martinnewham.art
   APP_ENV: prod
   APP_DEBUG: 0
 
@@ -47,11 +47,10 @@ jobs:
         run: composer install --no-dev --prefer-dist --no-progress --optimize-autoloader
 
       - name: Build static site
-        run: php bin/console stenope:build --base-url="$BASE_PATH" --host="$SITE_HOST" --scheme=https --no-interaction
+        run: php bin/console stenope:build --host="$SITE_HOST" --scheme=https --no-interaction
 
-      # Custom domain only — uncomment when serving from a root domain (and clear BASE_PATH):
-      # - name: Add CNAME for custom domain
-      #   run: echo "$SITE_HOST" > build/CNAME
+      - name: Add CNAME for custom domain
+        run: echo "$SITE_HOST" > build/CNAME
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
